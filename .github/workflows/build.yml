@@ -11,15 +11,13 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
       - run: npm install
       - run: npm run build
       - run: npx cap sync android
       - name: Build APK
         working-directory: ./android
         run: chmod +x ./gradlew && ./gradlew assembleDebug
-        env:
-          ANDROID_HOME: /usr/local/lib/android/sdk
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:

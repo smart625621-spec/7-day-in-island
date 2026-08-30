@@ -12,12 +12,14 @@ jobs:
         with:
           distribution: 'zulu'
           java-version: '17'
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
       - run: npm install
       - run: npm run build
       - run: npx cap sync android
       - name: Build APK
         working-directory: ./android
-        run: chmod +x ./gradlew && ./gradlew assembleDebug --stacktrace
+        run: chmod +x ./gradlew && ./gradlew assembleDebug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
